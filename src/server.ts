@@ -1,12 +1,10 @@
 import * as express from "express";
 import { Request, Response } from "express";
-import Person from "@/index";
 
 const app = express();
-const person = new Person();
 
 app.get("/", (req: Request, res: Response) => {
-  res.send(person.sayMyName());
+  res.send("Teste Olá Mundo!");
 });
 
 app.listen(3000, () => {
