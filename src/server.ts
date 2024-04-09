@@ -1,8 +1,8 @@
 import * as express from "express";
 import { Request, Response } from "express";
-import path from "path";
-import mustache from "mustache-express";
-import dotenv from "dotenv";
+import * as path from "path";
+import * as mustache from "mustache-express";
+import * as dotenv from "dotenv";
 import mainRoutes from "./routes/index";
 
 dotenv.config();
@@ -23,14 +23,6 @@ server.use((req: Request, res: Response) => {
   res.status(404).send("Página não encontrada!");
 });
 
-server.listen(process.env.PORT);
-
-const app = express();
-
-app.get("/", (req: Request, res: Response) => {
-  res.send("Teste Olá Mundo!");
-});
-
-app.listen(3000, () => {
-  console.log("Rodando na porta 3000");
+server.listen(process.env.PORT, () => {
+  console.log(process.env.PORT);
 });
