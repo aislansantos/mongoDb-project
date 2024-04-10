@@ -1,32 +1,25 @@
+import User from "@/models/User";
 import { Request, Response } from "express";
 
-export const nome = (req: Request, res: Response) => {
-  const nome: string = req.query.nome as string;
-  const idade: string = req.query.idade as string;
+export const addUserAction = async (req: Request, res: Response) => {
+  try {
+    const { name, lastName, email, age, interests } = req.body;
+    const newUser = new User();
 
-  res.render("pages/nome", {
-    nome,
-    idade,
-  });
-};
+    let arrayInterests = [];
+    arrayInterests = interests.split(",");
 
-export const idadeForm = (req: Request, res: Response) => {
-  res.render("pages/idade");
-};
+    newUser.name = { firstName: name, lastName: lastName };
+    newUser.email = email;
+    newUser.age = parseInt(age);
+    newUser.interests = arrayInterests;
 
-export const idadeAction = (req: Request, res: Response) => {
-  let mostrarIdade: boolean = false;
-  let idade: number = 0;
+    const result = await newUser.save();
 
-  if (req.body.ano) {
-    const anoNascimento: number = parseInt(req.body.ano as string);
-    const anoAtual: number = new Date().getFullYear();
-    idade = anoAtual - anoNascimento;
-    mostrarIdade = true;
+    console.log("Usuário Cadstrado com sucesso!", result);
+  } catch (error) {
+    console.log("Erro ao cadastrar", error);
   }
 
-  res.render("pages/idade", {
-    idade,
-    mostrarIdade,
-  });
+  res.redirect("localhost:2000");
 };
