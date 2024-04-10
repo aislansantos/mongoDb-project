@@ -1,0 +1,9 @@
+Paginação - Fundamento
+Usuarios = 10.000 registros
+página está mostrando de 20 em 20 usuários.
+
+página 1 = 1 até 20;(pule zero registros e mostre 20)
+página 2 = 21 até 40;(pule 20 registros e mostre 20)
+página 3 = 41 até 60;(pule 40 registros e mostre 20)...
+...página 8 = (pule 140 registros e mostre 20)
+

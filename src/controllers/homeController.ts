@@ -5,9 +5,14 @@ import { Product } from "../models/Product";
 import User from "@/models/User";
 
 export const home = async (req: Request, res: Response) => {
-  const usuarios = await User.find({});
+  const usuarios = await User.find({
+    age: { $gt: 1, $lt: 90 },
+  })
+    .sort({ "name.firstName": 1 })
+    .skip(0)
+    .limit(2);
 
-  console.log("usuarios: ", usuarios);
+  console.log("Usuarios: ", usuarios);
 
   const age: number = 90;
   let showOld: boolean = false;
