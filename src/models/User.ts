@@ -1,12 +1,11 @@
-import { Schema, model, connection } from "mongoose";
-
+import { Schema, model, Model, connection } from "mongoose";
 type UserType = {
   email: string;
   age: number;
   interests: [string];
   name: {
     firstName: string;
-    lastname: string;
+    lastName: string;
   };
 };
 
@@ -16,12 +15,11 @@ const schema = new Schema<UserType>({
   interests: [String],
   name: {
     firstName: { type: String, required: true },
-    lastname: String,
+    lastName: String,
   },
 });
 
 const modelName: string = "User";
-
 export default connection && connection.models[modelName]
-  ? connection.models[modelName]
+  ? (connection.models[modelName] as Model<UserType>)
   : model<UserType>(modelName, schema);
